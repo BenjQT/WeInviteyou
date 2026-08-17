@@ -1,0 +1,664 @@
+/* ==========================================================================
+   JhonJhon & Juliet — digital wedding invitation
+   Palette, type and spacing follow the Claude Design source 1:1.
+   ========================================================================== */
+
+/* --- Theme tokens -------------------------------------------------------- */
+
+:root,
+[data-theme="dark"] {
+  --pageBg: #0a1410;
+  --pageOv: rgba(10, 20, 16, .55);
+  --deepBg: #0f221b;
+  --deepOv1: rgba(8, 26, 20, .62);
+  --deepOv2: rgba(8, 20, 16, .82);
+  --deepFg: #f4efe4;
+  --deepMuted: #a8bcae;
+  --deepCard: rgba(255, 255, 255, .05);
+  --deepBorder: rgba(201, 163, 92, .35);
+  --softBg: #f6f1e6;
+  --softAlt: #efe8d9;
+  --softFg: #22352c;
+  --softMuted: #4a5c52;
+  --gold: #c9a35c;
+  --btnBg: #1b3a2c;
+  --btnFg: #f4efe4;
+  --dot: #1b3a2c;
+  --rule: rgba(138, 122, 84, .25);
+}
+
+[data-theme="light"] {
+  --pageBg: #f3eee2;
+  --pageOv: rgba(246, 242, 233, .9);
+  --deepBg: #f1ece0;
+  --deepOv1: rgba(246, 242, 233, .9);
+  --deepOv2: rgba(238, 232, 217, .95);
+  --deepFg: #1c3527;
+  --deepMuted: #5f7367;
+  --deepCard: rgba(28, 53, 39, .05);
+  --deepBorder: rgba(150, 124, 72, .4);
+  --softBg: #fdfbf6;
+  --softAlt: #f3eee2;
+  --softFg: #22352c;
+  --softMuted: #4a5c52;
+  --gold: #9c7c39;
+  --btnBg: #1b3a2c;
+  --btnFg: #f6f1e6;
+  --dot: #1b3a2c;
+  --rule: rgba(138, 122, 84, .3);
+}
+
+/* --- Base ---------------------------------------------------------------- */
+
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: 'Jost', sans-serif;
+  background: var(--pageBg);
+  color: var(--deepFg);
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, p, figure, ol { margin: 0; }
+img { display: block; }
+
+a { color: var(--gold); text-decoration: none; }
+a:hover { color: #e3c68c; }
+
+button { font: inherit; color: inherit; background: none; border: none; cursor: pointer; }
+
+.sr-only {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+}
+
+/* Fixed marble backdrop — a pinned layer rather than background-attachment,
+   which iOS Safari refuses to honour. */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  background-color: var(--pageBg);
+  background-image: linear-gradient(var(--pageOv), var(--pageOv)), url('uploads/bg-marble.jpg');
+  background-size: cover;
+  background-position: center;
+}
+
+.page {
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: clamp(0px, 4vw, 56px) clamp(0px, 3vw, 32px);
+}
+
+.card {
+  width: 100%;
+  max-width: min(480px, 100%);
+  background: var(--deepBg);
+  box-shadow: 0 0 80px rgba(0, 0, 0, .5);
+  overflow: hidden;
+  border-radius: clamp(0px, 1.4vw, 18px);
+}
+
+/* --- Section shells ------------------------------------------------------ */
+
+.sec { padding: 46px clamp(22px, 7vw, 36px) 40px; }
+
+.sec--deep {
+  background-color: var(--deepBg);
+  background-image: linear-gradient(var(--deepOv1), var(--deepOv2)), url('uploads/bg-marble.jpg');
+  background-size: cover;
+  background-position: center;
+  color: var(--deepFg);
+}
+
+.sec--soft { background: var(--softBg); color: var(--softFg); }
+.sec--softalt { background: var(--softAlt); color: var(--softFg); }
+
+.section-title {
+  text-align: center;
+  font-family: 'Jost', sans-serif;
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: .36em;
+  color: var(--softMuted);
+}
+.section-title--gold { color: var(--gold); }
+
+.section-rule { display: block; width: 36px; height: 1px; background: var(--gold); margin: 16px auto 34px; }
+.section-rule--soft { opacity: .6; margin-bottom: 20px; }
+
+/* --- Floating controls --------------------------------------------------- */
+
+.fabs {
+  position: fixed;
+  right: clamp(12px, 3vw, 26px);
+  bottom: clamp(12px, 3vw, 26px);
+  z-index: 60;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.fab {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  border: 1px solid var(--gold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, .3);
+  transition: transform .2s ease;
+}
+.fab:hover { transform: translateY(-2px); }
+.fab--ghost { background: var(--deepBg); color: var(--gold); }
+.fab--solid { background: var(--gold); color: #0f221b; font-size: 15px; }
+
+.yt-host {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 240px;
+  height: 135px;
+  opacity: .001;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: -1;
+}
+
+/* --- Hero ---------------------------------------------------------------- */
+
+.hero {
+  position: relative;
+  padding: clamp(40px, 11vw, 60px) clamp(22px, 7vw, 36px) 0;
+  text-align: center;
+}
+
+.monogram {
+  position: relative;
+  width: 108px;
+  height: 108px;
+  margin: 0 auto;
+  animation: floaty 6s ease-in-out infinite;
+}
+.monogram__ring {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 1px solid var(--gold);
+  opacity: .55;
+  animation: ringIn 1.4s cubic-bezier(.2, .8, .2, 1) both, glowPulse 5s ease-in-out 1.4s infinite;
+}
+.monogram__dashes {
+  position: absolute;
+  inset: 9px;
+  border-radius: 50%;
+  border: 1px dashed var(--gold);
+  opacity: .3;
+  animation: spin 34s linear infinite;
+}
+.monogram__initials {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 34px;
+  letter-spacing: .14em;
+  background: linear-gradient(100deg, #8a6f37 18%, #f0dca6 42%, #c9a35c 58%, #8a6f37 82%);
+  background-size: 250% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: fadeUp 1.6s ease .4s both, shimmer 6s ease-in-out 1.6s infinite;
+}
+
+.hairline-drop {
+  display: block;
+  width: 1px;
+  height: 34px;
+  background: linear-gradient(var(--gold), transparent);
+  margin: 14px auto 20px;
+}
+
+.eyebrow { font-size: 11px; letter-spacing: .34em; color: var(--deepMuted); }
+
+.names {
+  font-family: 'Playfair Display', serif;
+  font-weight: 400;
+  font-size: clamp(38px, 11.5vw, 54px);
+  line-height: 1.05;
+  letter-spacing: .05em;
+  margin-top: 22px;
+}
+.names--last { margin: 0 0 26px; }
+
+.amp {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 34px;
+  color: var(--gold);
+  margin: 2px 0;
+}
+
+.rule-label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  color: var(--gold);
+  font-size: 9px;
+  letter-spacing: .3em;
+}
+.rule-label__line { width: 44px; height: 1px; background: var(--gold); opacity: .5; }
+
+.bigdate {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(19px, 5.5vw, 24px);
+  letter-spacing: .28em;
+  margin: 16px 0 6px;
+}
+
+.dayline { font-size: 10px; letter-spacing: .32em; color: var(--deepMuted); margin-bottom: 22px; }
+
+.hashtag-pill {
+  display: inline-block;
+  border: 1px solid var(--deepBorder);
+  border-radius: 40px;
+  padding: 9px 18px;
+  font-size: 11px;
+  letter-spacing: .14em;
+  color: var(--gold);
+  background: var(--deepCard);
+  margin-bottom: 30px;
+}
+
+/* --- Countdown ----------------------------------------------------------- */
+
+.countdown {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: clamp(6px, 2vw, 12px);
+  margin: 0 0 34px;
+}
+.cd {
+  border: 1px solid var(--deepBorder);
+  border-radius: 10px;
+  padding: 14px 4px 11px;
+  background: var(--deepCard);
+}
+.cd__num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(24px, 7vw, 30px);
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+.cd__num--gold { color: var(--gold); }
+.cd__lbl { font-size: 8px; letter-spacing: .22em; color: var(--deepMuted); margin-top: 7px; }
+
+/* --- Photos -------------------------------------------------------------- */
+
+.photo { position: relative; overflow: hidden; }
+.photo img { width: 100%; height: 100%; object-fit: cover; }
+
+.photo--arch {
+  border-radius: 200px 200px 12px 12px;
+  border: 1px solid var(--gold);
+  aspect-ratio: 3 / 4;
+}
+.photo--arch img { object-position: 14% 35%; }
+
+.photo--tall { grid-row: span 2; border-radius: 8px; height: 100%; min-height: 0; }
+.photo--tall img { object-position: 72% 60%; }
+
+.photo--square { aspect-ratio: 1 / 1; border-radius: 8px; }
+.photo--square img { object-position: 14% 35%; }
+
+/* For a source already cropped square — nothing to pan, so hold it centred. */
+.photo--centred img { object-position: center; }
+
+/* Full-bleed row inside the gallery grid — the aerial frame and the film. */
+.photo--wide { grid-column: 1 / -1; aspect-ratio: 16 / 9; border-radius: 8px; }
+.photo--wide img { object-position: center 48%; }
+
+/* Graceful stand-in until the couple's photos are dropped into /uploads. */
+.photo.is-empty img { display: none; }
+.photo.is-empty {
+  background: linear-gradient(160deg, rgba(201, 163, 92, .16), rgba(27, 58, 44, .5));
+  border: 1px solid var(--deepBorder);
+}
+.photo.is-empty::after {
+  content: "J / J";
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 30px;
+  letter-spacing: .14em;
+  color: var(--gold);
+  opacity: .7;
+}
+
+/* --- Music --------------------------------------------------------------- */
+
+.sec--music { padding: 26px clamp(22px, 7vw, 36px) 40px; }
+
+.music-card {
+  width: 100%;
+  border: 1px solid var(--deepBorder);
+  border-radius: 14px;
+  padding: 16px 18px;
+  background: var(--deepCard);
+  color: inherit;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  text-align: left;
+}
+.music-card__play {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--gold);
+  color: #0f221b;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 15px;
+  flex: 0 0 auto;
+}
+.music-card__meta { flex: 1; min-width: 0; display: block; }
+.music-card__title { display: block; font-family: 'Cormorant Garamond', serif; font-size: 17px; }
+.music-card__status { display: block; font-size: 9px; letter-spacing: .26em; color: var(--deepMuted); margin-top: 4px; }
+
+/* The resting transforms matter: while the track is paused the animation stops,
+   and the bars fall back to these so the equaliser still reads as an equaliser
+   instead of three solid strokes. */
+.eq { display: flex; align-items: flex-end; gap: 3px; height: 20px; }
+.eq__bar {
+  width: 3px;
+  height: 100%;
+  background: var(--gold);
+  transform-origin: bottom;
+  transform: scaleY(.45);
+  animation: eqBar 1.1s ease-in-out infinite;
+}
+.eq__bar:nth-child(2) { transform: scaleY(.85); animation: eqBar 1.1s ease-in-out .25s infinite; }
+.eq__bar:nth-child(3) { transform: scaleY(.6); animation: eqBar 1.1s ease-in-out .5s infinite; }
+body.is-muted .eq__bar { animation: none; }
+
+/* --- The big day --------------------------------------------------------- */
+
+.event { display: flex; flex-direction: column; gap: 14px; }
+.event__head { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; }
+.event__name { font-family: 'Cormorant Garamond', serif; font-weight: 400; font-size: 26px; letter-spacing: .12em; }
+.event__time { font-size: 13px; letter-spacing: .14em; color: var(--softMuted); }
+.event__place { font-size: 14px; line-height: 1.7; color: var(--softMuted); }
+
+.btn {
+  align-self: flex-start;
+  background: var(--btnBg);
+  color: var(--btnFg);
+  font-size: 10px;
+  letter-spacing: .24em;
+  padding: 12px 22px;
+  border-radius: 40px;
+  transition: opacity .2s ease;
+}
+.btn:hover { opacity: .85; color: var(--btnFg); }
+
+.divider { height: 1px; border: 0; background: var(--rule); margin: 34px 0; }
+
+/* --- Timeline ------------------------------------------------------------ */
+
+.sec--timeline { padding-top: 10px; padding-bottom: 46px; }
+.timeline { list-style: none; padding: 0; display: flex; flex-direction: column; gap: 22px; }
+.timeline li { display: flex; align-items: center; gap: 16px; }
+.timeline__dot {
+  width: 34px; height: 34px; border-radius: 50%;
+  border: 1px solid var(--gold); background: var(--dot); flex: 0 0 auto;
+}
+.timeline__time { font-size: 13px; letter-spacing: .1em; color: var(--softMuted); }
+.timeline__label { font-family: 'Cormorant Garamond', serif; font-size: 19px; letter-spacing: .14em; }
+
+/* --- Finer details ------------------------------------------------------- */
+/* The attire type, swatches and note keep the exact type and rhythm they had
+   as the standalone dress-code card — the content moved, its styling did not. */
+
+.finer { padding: 46px clamp(22px, 7vw, 36px) 52px; text-align: center; }
+.finer__block { display: flex; flex-direction: column; }
+.finer__heading {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 400;
+  font-size: 22px;
+  letter-spacing: .22em;
+  color: var(--softFg);
+}
+.finer__heading::after {
+  content: "";
+  display: block;
+  width: 24px;
+  height: 1px;
+  background: var(--gold);
+  opacity: .7;
+  margin: 12px auto 0;
+}
+.finer__body {
+  font-size: 13px;
+  line-height: 2;
+  letter-spacing: .04em;
+  color: var(--softMuted);
+  max-width: 320px;
+  margin: 18px auto 0;
+}
+.finer__hashtag {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(18px, 5.5vw, 21px);
+  letter-spacing: .1em;
+  color: var(--gold);
+  margin-top: 20px;
+}
+.finer .divider { margin: 30px 0; }
+.finer .dress__value { margin: 16px 0 0; }
+.finer .swatches { margin-top: 22px; }
+
+.dress__value { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 30px; margin: 12px 0 26px; }
+.swatches { display: flex; justify-content: center; gap: 12px; }
+.swatch { width: 38px; height: 38px; border-radius: 50%; }
+.swatch--pale { border: 1px solid rgba(0, 0, 0, .08); }
+.dress__note { font-size: 11px; letter-spacing: .16em; color: var(--softMuted); margin-top: 22px; line-height: 1.8; }
+
+/* --- Gallery ------------------------------------------------------------- */
+
+.gallery { padding: 46px clamp(16px, 5vw, 26px); }
+.gallery__tag { text-align: center; font-size: 11px; letter-spacing: .12em; color: var(--deepMuted); margin-bottom: 24px; }
+.gallery__grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+
+/* Hover is scoped to the grid so the hero arch keeps its still, framed look. */
+.gallery__grid .photo { transition: box-shadow .45s ease; }
+.gallery__grid .photo img,
+.gallery__grid .film__el { transition: transform .7s cubic-bezier(.2, .7, .2, 1); }
+.gallery__grid .photo:hover { box-shadow: 0 0 0 1px var(--gold), 0 14px 34px rgba(0, 0, 0, .38); }
+.gallery__grid .photo:hover img { transform: scale(1.055); }
+
+/* --- The film ------------------------------------------------------------ */
+
+.film { background: rgba(0, 0, 0, .3); }
+.film__el { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+.film__btn {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity .4s ease;
+}
+.film__btn::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(rgba(8, 26, 20, .1), rgba(8, 20, 16, .55));
+  transition: opacity .4s ease;
+}
+
+.film__icon {
+  position: relative;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: var(--gold);
+  color: #0f221b;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  padding-left: 3px;                 /* optically centres the ▶ glyph */
+  box-shadow: 0 8px 24px rgba(0, 0, 0, .35);
+  transition: transform .35s ease;
+}
+.film__btn:hover .film__icon { transform: scale(1.08); }
+
+/* Once it is running the chrome gets out of the way, and comes back on hover. */
+.film.is-playing .film__btn { opacity: 0; }
+.film.is-playing .film__btn:hover { opacity: 1; }
+.film.is-playing .film__icon { padding-left: 0; }
+
+.film__caption {
+  position: absolute;
+  left: 14px;
+  bottom: 12px;
+  font-size: 9px;
+  letter-spacing: .26em;
+  color: var(--deepFg);
+  text-shadow: 0 1px 8px rgba(0, 0, 0, .6);
+  transition: opacity .4s ease;
+  pointer-events: none;
+}
+.film.is-playing .film__caption { opacity: 0; }
+
+/* --- RSVP ---------------------------------------------------------------- */
+
+.rsvp { padding: 52px clamp(22px, 7vw, 36px); text-align: center; }
+.rsvp__title { font-family: 'Cormorant Garamond', serif; font-weight: 400; font-size: clamp(30px, 9vw, 38px); letter-spacing: .3em; }
+.rsvp__lead { font-size: 11px; letter-spacing: .24em; color: var(--deepMuted); margin: 16px 0 30px; line-height: 2; }
+
+.rsvp__form { display: flex; flex-direction: column; gap: 12px; margin-bottom: 18px; }
+
+.field {
+  width: 100%;
+  background: var(--deepCard);
+  border: 1px solid var(--deepBorder);
+  border-radius: 10px;
+  padding: 14px 16px;
+  color: var(--deepFg);
+  font-family: 'Jost', sans-serif;
+  font-size: 13px;
+  letter-spacing: .08em;
+  outline: none;
+}
+.field::placeholder { color: currentColor; opacity: .45; }
+.field:focus-visible { border-color: var(--gold); }
+
+.rsvp__btn {
+  width: 100%;
+  border: 1px solid var(--gold);
+  border-radius: 44px;
+  padding: 18px 20px;
+  font-size: 12px;
+  letter-spacing: .26em;
+  background: transparent;
+  color: var(--deepFg);
+  transition: background .2s ease, color .2s ease;
+}
+.rsvp__btn:hover { background: #c9a35c; color: #0f221b; }
+.rsvp__btn.is-done,
+.rsvp__btn.is-done:hover { background: #c9a35c; color: #0f221b; cursor: default; }
+.rsvp__btn:disabled { cursor: default; }
+
+.rsvp__error { font-size: 11px; letter-spacing: .1em; color: #c9776a; margin-top: 14px; min-height: 14px; }
+.rsvp__note { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 18px; color: var(--gold); margin-top: 8px; min-height: 22px; }
+
+/* --- Thank you ----------------------------------------------------------- */
+
+.thanks { padding: 52px clamp(22px, 7vw, 36px) 60px; text-align: center; }
+.thanks__title { font-family: 'Cormorant Garamond', serif; font-weight: 400; font-size: 30px; letter-spacing: .2em; }
+.thanks .section-rule { margin: 18px auto 22px; }
+.thanks__body { font-size: 14px; line-height: 2; color: var(--softMuted); max-width: 280px; margin: 0 auto; }
+.thanks__love { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 20px; color: var(--softMuted); margin-top: 30px; }
+.thanks__names { font-family: 'Cormorant Garamond', serif; font-size: clamp(18px, 5.5vw, 22px); letter-spacing: .18em; margin-top: 6px; }
+.thanks__hashtag { font-size: 11px; letter-spacing: .14em; color: var(--gold); margin-top: 18px; }
+
+/* --- Opening gate -------------------------------------------------------- */
+
+.gate {
+  position: fixed;
+  inset: 0;
+  z-index: 80;
+  background-color: #0a1410;
+  background-image: linear-gradient(rgba(8, 26, 20, .72), rgba(8, 20, 16, .88)), url('uploads/bg-marble.jpg');
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 26px;
+  text-align: center;
+  color: #f4efe4;
+  padding: 32px;
+  transition: opacity .5s ease;
+}
+.gate.is-closing { opacity: 0; }
+.gate.is-open { display: none; }
+
+.monogram--gate { width: 104px; height: 104px; }
+.monogram--gate .monogram__ring { border-color: rgba(201, 163, 92, .55); opacity: 1; animation: glowPulse 4s ease-in-out infinite; }
+.monogram--gate .monogram__initials { background: none; color: #c9a35c; font-size: 32px; animation: none; }
+
+.gate__names { font-family: 'Playfair Display', serif; font-size: 26px; letter-spacing: .12em; }
+.gate__date { font-size: 10px; letter-spacing: .3em; color: #a8bcae; }
+.gate__btn {
+  border: 1px solid #c9a35c;
+  border-radius: 44px;
+  padding: 16px 34px;
+  font-size: 11px;
+  letter-spacing: .26em;
+  color: #f4efe4;
+  transition: background .2s ease, color .2s ease;
+}
+.gate__btn:hover { background: #c9a35c; color: #0f221b; }
+.gate__hint { font-size: 9px; letter-spacing: .2em; color: #8fa899; }
+
+/* --- Motion -------------------------------------------------------------- */
+
+@keyframes fadeUp { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+@keyframes spin { to { transform: rotate(360deg); } }
+@keyframes ringIn { from { opacity: 0; transform: scale(.7) rotate(-25deg); } to { opacity: 1; transform: none; } }
+@keyframes shimmer { 0% { background-position: -160% 0; } 60%, 100% { background-position: 260% 0; } }
+@keyframes glowPulse { 0%, 100% { box-shadow: 0 0 0 rgba(201, 163, 92, 0); } 50% { box-shadow: 0 0 26px rgba(201, 163, 92, .3); } }
+@keyframes floaty { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
+@keyframes eqBar { 0%, 100% { transform: scaleY(.35); } 50% { transform: scaleY(1); } }
+
+/* Drop the animation outright rather than running it at zero duration — that
+   left elements frozen mid-keyframe. With `animation: none` each one falls back
+   to its resting style, which is composed to look finished on its own.
+   Two exemptions, both contained motion that stays inside its own box rather
+   than travelling across the screen: the equaliser bars, which are a status
+   indicator rather than decoration — they are how a guest tells the music is
+   playing — and the monogram's gold shimmer, which is the piece's signature. */
+@media (prefers-reduced-motion: reduce) {
+  *:not(.eq__bar):not(.monogram__initials), *::before, *::after {
+    animation: none !important;
+    transition-duration: .12s !important;
+  }
+}

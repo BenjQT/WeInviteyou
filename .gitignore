@@ -1,0 +1,18 @@
+# OS
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+.DS_Store
+
+# Editors
+.vscode/
+.idea/
+*.swp
+
+# Vercel
+.vercel
+
+# Source media kept locally, not served by the site. The .mp4 here is 267 MB —
+# past GitHub's 100 MB per-file hard limit, and far too heavy to stream from a
+# static host. See the README's "Full wedding video" note.
+moriweddinginvitation/
