@@ -10,7 +10,7 @@ on any static host (Netlify, Vercel, GitHub Pages, cPanel) and it works.
 index.html      structure and copy
 styles.css      theme tokens, layout, animation
 script.js       countdown, theme toggle, music, gate, film, RSVP
-uploads/        photos, the film, the marble backdrop
+uploads/        photos, the film, the marble backdrop, the J/J emblem
 favicon.ico     J/J emblem, 16/32/48px — plus the .png variants beside it
 ```
 

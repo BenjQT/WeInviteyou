@@ -621,9 +621,15 @@ body.is-muted .eq__bar { animation: none; }
 .gate.is-closing { opacity: 0; }
 .gate.is-open { display: none; }
 
-.monogram--gate { width: 104px; height: 104px; }
-.monogram--gate .monogram__ring { border-color: rgba(201, 163, 92, .55); opacity: 1; animation: glowPulse 4s ease-in-out infinite; }
-.monogram--gate .monogram__initials { background: none; color: #c9a35c; font-size: 32px; animation: none; }
+/* The emblem carries its own gold ring and lettering, so it replaces the
+   CSS-drawn monogram here rather than sitting inside it. */
+.gate__emblem {
+  width: clamp(116px, 32vw, 140px);
+  height: clamp(116px, 32vw, 140px);
+  border-radius: 50%;
+  animation: fadeUp 1.2s ease both, floaty 6s ease-in-out infinite, glowPulse 4s ease-in-out infinite;
+}
+.gate__emblem img { width: 100%; height: 100%; object-fit: contain; }
 
 .gate__names { font-family: 'Playfair Display', serif; font-size: 26px; letter-spacing: .12em; }
 .gate__date { font-size: 10px; letter-spacing: .3em; color: #a8bcae; }
