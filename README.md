@@ -59,6 +59,15 @@ fights the song. The `#t=0.6` fragment on its `src` makes the browser paint a
 real frame of the film as its own still, so the tile is never black before a
 guest taps play — there is no separate poster image to keep in sync.
 
+### Full wedding video
+
+`moriweddinginvitation/` holds a 267 MB MP4 and an MP3. Both are git-ignored and
+are not part of the site. The MP4 is past GitHub's 100 MB per-file hard limit,
+and serving a file that size from a static host would be slow and expensive for
+guests on mobile data. To put the full video on the invitation, upload it to
+YouTube or Vimeo and embed it, or export a compressed web cut (1080p, ~8 Mbps,
+under ~25 MB) into `uploads/` and point the film tile at it.
+
 ## Settings
 
 Everything configurable sits in the `CONFIG` block at the top of `script.js`:
