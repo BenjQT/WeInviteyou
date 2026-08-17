@@ -11,7 +11,13 @@ index.html      structure and copy
 styles.css      theme tokens, layout, animation
 script.js       countdown, theme toggle, music, gate, film, RSVP
 uploads/        photos, the film, the marble backdrop
+favicon.ico     J/J emblem, 16/32/48px — plus the .png variants beside it
 ```
+
+The favicons are generated from the emblem artwork: `favicon.ico` for the tab,
+`favicon-16.png` / `favicon-32.png` for modern browsers, and
+`apple-touch-icon.png` at 180px on a solid `#0f221b` tile, since iOS composites
+home-screen icons over its own background rather than honouring transparency.
 
 ## Sections
 
