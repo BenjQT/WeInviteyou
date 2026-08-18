@@ -489,9 +489,11 @@ body.is-muted .eq__bar { animation: none; }
 /* Hover is scoped to the grid so the hero arch keeps its still, framed look. */
 .gallery__grid .photo { transition: box-shadow .45s ease; }
 .gallery__grid .photo img { transition: transform .7s cubic-bezier(.2, .7, .2, 1); }
-.gallery__grid .photo:hover { box-shadow: 0 0 0 1px var(--gold), 0 14px 34px rgba(0, 0, 0, .38); }
-.gallery__grid .photo:hover img { transform: scale(1.055); }
-.gallery__grid .film:hover .film__el { transform: scale(1.03); }
+@media (hover: hover) and (pointer: fine) {
+  .gallery__grid .photo:hover { box-shadow: 0 0 0 1px var(--gold), 0 14px 34px rgba(0, 0, 0, .38); }
+  .gallery__grid .photo:hover img { transform: scale(1.055); }
+  .gallery__grid .film:hover .film__el { transform: scale(1.03); }
+}
 
 /* --- Films in the gallery ------------------------------------------------- */
 
@@ -505,6 +507,7 @@ body.is-muted .eq__bar { animation: none; }
 }
 
 .film__btn {
+  -webkit-tap-highlight-color: transparent;
   position: absolute;
   inset: 0;
   display: flex;
@@ -534,12 +537,21 @@ body.is-muted .eq__bar { animation: none; }
   box-shadow: 0 8px 24px rgba(0, 0, 0, .35);
   transition: transform .35s ease;
 }
-.film__btn:hover .film__icon { transform: scale(1.08); }
 
-/* Once running, the chrome steps aside and returns on hover. */
+/* Once running, the chrome goes and stays gone. The button keeps its hit area
+   so a tap anywhere on the tile still pauses — it is simply invisible while the
+   film plays, rather than sitting over the couple. */
 .film.is-playing .film__btn { opacity: 0; }
-.film.is-playing .film__btn:hover { opacity: 1; }
 .film.is-playing .film__icon { padding-left: 0; }
+
+/* Hover affordances are for real pointers only. A touch browser synthesises a
+   hover state on tap and holds it there, so on a phone these rules fired on the
+   very tap that started the film and pinned the button back over their faces
+   for its whole length. */
+@media (hover: hover) and (pointer: fine) {
+  .film__btn:hover .film__icon { transform: scale(1.08); }
+  .film.is-playing .film__btn:hover { opacity: 1; }
+}
 
 /* --- RSVP ---------------------------------------------------------------- */
 

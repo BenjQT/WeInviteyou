@@ -140,6 +140,14 @@ Gallery tiles lift on hover: a gold hairline ring and a slow 1.055× zoom on the
 image inside. The hero arch is deliberately excluded so it keeps its still,
 framed look.
 
+Every hover affordance sits behind `@media (hover: hover) and (pointer: fine)`,
+so touch devices never get them. A phone browser synthesises a hover state on
+tap and then holds it: without the guard, the tap that started a film
+immediately re-showed the play button over the couple and left it there for the
+whole clip, and left a stuck 1.03× zoom on the video besides. On touch the
+button now simply goes when playback starts and stays gone — the tile keeps its
+hit area, so a tap anywhere on it still pauses and brings the button back.
+
 ### Theme
 
 Dark is the default. The ☾/☀ button swaps to the ivory palette and remembers the
