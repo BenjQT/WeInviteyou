@@ -10,7 +10,7 @@ on any static host (Netlify, Vercel, GitHub Pages, cPanel) and it works.
 index.html      structure and copy
 styles.css      theme tokens, layout, animation
 script.js       countdown, theme toggle, music, opening gate, RSVP
-uploads/        photos, the gate film, the marble backdrop, the J/J emblem
+uploads/        photos, the films, the marble backdrop, the J/J emblem
 favicon.ico     J/J emblem, 16/32/48px — plus the .png variants beside it
 ```
 
@@ -36,10 +36,10 @@ above it.
 | --- | --- | --- |
 | `uploads/photo-1.jpg` | Hero arch + gallery square | `object-position: 14% 35%` — couple sits left of centre |
 | `uploads/photo-2.jpg` | Tall gallery frame | `object-position: 72% 60%` |
-| `uploads/photo-4.jpg` | Gallery square (the old church bench) | Pre-cropped square, held centred |
-| `uploads/photo-3.jpg` | Wide gallery frame (aerial) | `object-position: center 48%` |
 | `uploads/photo-5.jpg` | Gallery square (blue bench, casual) | Pre-cropped square, held centred |
-| `uploads/photo-6.jpg` | Gallery square (uniform and veil) | Pre-cropped square, held centred |
+| `uploads/photo-6.jpg` | Wide gallery frame (uniform and veil) | Pre-cropped 16:9 |
+| `uploads/film-1.mp4` | Gallery film, full width | 1280×576, 11s, 1.1 MB |
+| `uploads/film-2.mp4` | Gallery film, full width | 1280×576, 52s, 6.3 MB |
 | `uploads/gate-loop.mp4` | Background film on the opening gate | 1280×576, 5.8s loop, 630 KB |
 
 To swap in different photos, overwrite those files. If the framing then sits
@@ -50,17 +50,15 @@ horizontally, the second vertically.
 If a photo is ever missing, its frame falls back to a gold "J / J" panel rather
 than a broken image, so the page still looks finished.
 
-The aerial shot is re-encoded to 1400px wide at quality 78 (390 KB, down from
-4.5 MB), and the bench photo cropped to a 1000×1000 square at quality 80
-(176 KB, down from 3.3 MB) — worth repeating for any photo you add, since guests
-open this on mobile data.
+Every photo here is re-encoded down from a multi-megabyte original — 1400px wide
+at quality 78-80 lands each one between 120 and 180 KB. Worth repeating for any
+photo you add, since guests open this on mobile data.
 
-Four of the gallery tiles are pre-cropped squares rather than panned with
-`object-position`: dropped into a small tile untouched, a wide original leaves
-the couple a speck in a lot of scenery. Crops taken from each original, so they
-are repeatable: photo-4 a 1300px square at (340, 492) of 2400×1792; photo-5 a
-1080px square at (0, 300) of 1080×1622; photo-6 a 1000px square at (290, 0) of
-1624×1080.
+Some tiles are pre-cropped rather than panned with `object-position`: dropped
+into a small tile untouched, a wide original leaves the couple a speck in a lot
+of scenery. Crops taken from each original, so they are repeatable: photo-5 a
+1080px square at (0, 300) of 1080×1622; photo-6 a 1624×913 band at (0, 34) of
+1624×1080, resized to 1400×788.
 
 ### The gate film
 
@@ -75,6 +73,17 @@ crops it hard in portrait. The scrim over it is therefore two layers: a soft
 radial pool of shade under the emblem and lettering, over a lighter overall
 wash — the type always has something to sit on while the film stays visible
 towards the edges. Both live in `.gate__scrim`.
+
+### Films in the gallery
+
+Two tiles are films, each in a `.photo--cinema` band at the source's native
+2.22:1 rather than cropped into the 16:9 frame above them. They are muted and
+looping so they never fight the song, they are click-to-play, and starting one
+pauses the other. `preload="metadata"` means the 6.3 MB file only downloads if a
+guest actually taps it.
+
+As with the gate, `#t=0.5` on each `src` makes the browser paint a real frame as
+the tile's own still, so no poster images need keeping in sync.
 
 ### Full wedding video
 

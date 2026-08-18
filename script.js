@@ -214,6 +214,46 @@ var Music = (function () {
   };
 })();
 
+/* --- Films in the gallery ------------------------------------------------ */
+
+// Kept muted and looping on purpose: a film should never fight the song playing
+// over it. Each tile toggles independently, and starting one stops the others.
+(function films() {
+  var tiles = [].slice.call(document.querySelectorAll('.film'));
+  if (!tiles.length) return;
+
+  tiles.forEach(function (tile) {
+    var video = tile.querySelector('.film__el');
+    var btn = tile.querySelector('.film__btn');
+    var icon = tile.querySelector('.film__icon');
+
+    btn.addEventListener('click', function () {
+      if (video.paused) {
+        tiles.forEach(function (other) {
+          var v = other.querySelector('.film__el');
+          if (other !== tile && !v.paused) v.pause();
+        });
+        var p = video.play();
+        if (p && p.catch) p.catch(function () { /* refused — leave the still up */ });
+      } else {
+        video.pause();
+      }
+    });
+
+    video.addEventListener('play', function () {
+      tile.classList.add('is-playing');
+      icon.innerHTML = '&#10073;&#10073;';
+      btn.setAttribute('aria-label', 'Pause this film');
+    });
+
+    video.addEventListener('pause', function () {
+      tile.classList.remove('is-playing');
+      icon.innerHTML = '&#9654;';
+      btn.setAttribute('aria-label', 'Play this film');
+    });
+  });
+})();
+
 /* --- Opening gate -------------------------------------------------------- */
 
 (function gate() {

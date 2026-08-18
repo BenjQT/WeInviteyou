@@ -108,7 +108,7 @@
           <h3 class="event__name">CEREMONY</h3>
           <p class="event__time">1:00 PM</p>
         </div>
-        <p class="event__place">Our Lady of Fatima Parish Church<br />Anabu Coastal, Imus City, Cavite</p>
+        <p class="event__place">Our Lady of Fatima Parish Church<br />Anabu Coastal, Anabu II-D<br />Imus City, Cavite</p>
         <a class="btn" target="_blank" rel="noopener"
            href="https://maps.google.com/?q=Our+Lady+of+Fatima+Parish+Church+Anabu+Imus+Cavite">VIEW LOCATION</a>
       </div>
@@ -120,7 +120,7 @@
           <h3 class="event__name">RECEPTION</h3>
           <p class="event__time">TO FOLLOW</p>
         </div>
-        <p class="event__place">Ma Clare Resort<br />091 Anabu Road, Imus, Cavite</p>
+        <p class="event__place">MaClare Resort<br />091 Anabu Rd., Imus<br />4103 Cavite</p>
         <a class="btn" target="_blank" rel="noopener"
            href="https://maps.google.com/?q=Ma+Clare+Resort+Anabu+Imus+Cavite">VIEW LOCATION</a>
       </div>
@@ -148,19 +148,29 @@
         </figure>
 
         <figure class="photo photo--square photo--centred">
-          <img src="uploads/photo-4.jpg" alt="On the bench outside the old church" loading="lazy" onerror="this.closest('.photo').classList.add('is-empty')" />
-        </figure>
-
-        <figure class="photo photo--wide">
-          <img src="uploads/photo-3.jpg" alt="JhonJhon and Juliet lying in the grass, seen from above" loading="lazy" onerror="this.closest('.photo').classList.add('is-empty')" />
-        </figure>
-
-        <figure class="photo photo--square photo--centred">
           <img src="uploads/photo-5.jpg" alt="On the blue bench in the flower garden" loading="lazy" onerror="this.closest('.photo').classList.add('is-empty')" />
         </figure>
 
-        <figure class="photo photo--square photo--centred">
+        <figure class="photo photo--wide">
           <img src="uploads/photo-6.jpg" alt="In uniform and veil on the blue bench" loading="lazy" onerror="this.closest('.photo').classList.add('is-empty')" />
+        </figure>
+
+        <!-- #t=0.5 makes the browser paint a real frame as the tile's own still,
+             so a film never sits black before a guest taps play. -->
+        <figure class="photo photo--cinema film">
+          <video class="film__el" src="uploads/film-1.mp4#t=0.5" preload="metadata" playsinline loop muted
+                 aria-label="A short film of JhonJhon and Juliet"></video>
+          <button type="button" class="film__btn" aria-label="Play this film">
+            <span class="film__icon">&#9654;</span>
+          </button>
+        </figure>
+
+        <figure class="photo photo--cinema film">
+          <video class="film__el" src="uploads/film-2.mp4#t=0.5" preload="metadata" playsinline loop muted
+                 aria-label="A longer film of JhonJhon and Juliet"></video>
+          <button type="button" class="film__btn" aria-label="Play this film">
+            <span class="film__icon">&#9654;</span>
+          </button>
         </figure>
       </div>
     </section>

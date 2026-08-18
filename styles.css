@@ -328,6 +328,10 @@ body::before {
 .photo--wide { grid-column: 1 / -1; aspect-ratio: 16 / 9; border-radius: 8px; }
 .photo--wide img { object-position: center 48%; }
 
+/* The films are 2.22:1, so they get their own band at native ratio rather than
+   being cropped into the 16:9 frame above. */
+.photo--cinema { grid-column: 1 / -1; aspect-ratio: 2.22 / 1; border-radius: 8px; }
+
 /* Graceful stand-in until the couple's photos are dropped into /uploads. */
 .photo.is-empty img { display: none; }
 .photo.is-empty {
@@ -487,6 +491,55 @@ body.is-muted .eq__bar { animation: none; }
 .gallery__grid .photo img { transition: transform .7s cubic-bezier(.2, .7, .2, 1); }
 .gallery__grid .photo:hover { box-shadow: 0 0 0 1px var(--gold), 0 14px 34px rgba(0, 0, 0, .38); }
 .gallery__grid .photo:hover img { transform: scale(1.055); }
+.gallery__grid .film:hover .film__el { transform: scale(1.03); }
+
+/* --- Films in the gallery ------------------------------------------------- */
+
+.film { background: rgba(0, 0, 0, .35); }
+.film__el {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform .7s cubic-bezier(.2, .7, .2, 1);
+}
+
+.film__btn {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity .4s ease;
+}
+.film__btn::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(rgba(8, 26, 20, .12), rgba(8, 20, 16, .5));
+}
+
+.film__icon {
+  position: relative;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--gold);
+  color: #0f221b;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 15px;
+  padding-left: 2px;                 /* optically centres the play glyph */
+  box-shadow: 0 8px 24px rgba(0, 0, 0, .35);
+  transition: transform .35s ease;
+}
+.film__btn:hover .film__icon { transform: scale(1.08); }
+
+/* Once running, the chrome steps aside and returns on hover. */
+.film.is-playing .film__btn { opacity: 0; }
+.film.is-playing .film__btn:hover { opacity: 1; }
+.film.is-playing .film__icon { padding-left: 0; }
 
 /* --- RSVP ---------------------------------------------------------------- */
 
