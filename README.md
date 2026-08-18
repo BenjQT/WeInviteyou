@@ -9,8 +9,8 @@ on any static host (Netlify, Vercel, GitHub Pages, cPanel) and it works.
 ```
 index.html      structure and copy
 styles.css      theme tokens, layout, animation
-script.js       countdown, theme toggle, music, gate, film, RSVP
-uploads/        photos, the film, the marble backdrop, the J/J emblem
+script.js       countdown, theme toggle, music, opening gate, RSVP
+uploads/        photos, the gate film, the marble backdrop, the J/J emblem
 favicon.ico     J/J emblem, 16/32/48px — plus the .png variants beside it
 ```
 
@@ -36,9 +36,11 @@ above it.
 | --- | --- | --- |
 | `uploads/photo-1.jpg` | Hero arch + gallery square | `object-position: 14% 35%` — couple sits left of centre |
 | `uploads/photo-2.jpg` | Tall gallery frame | `object-position: 72% 60%` |
-| `uploads/photo-4.jpg` | Second gallery square (the bench) | Pre-cropped square, held centred |
+| `uploads/photo-4.jpg` | Gallery square (the old church bench) | Pre-cropped square, held centred |
 | `uploads/photo-3.jpg` | Wide gallery frame (aerial) | `object-position: center 48%` |
-| `uploads/couple-garden.mp4` | The film, full width below the photos | 16:9 |
+| `uploads/photo-5.jpg` | Gallery square (blue bench, casual) | Pre-cropped square, held centred |
+| `uploads/photo-6.jpg` | Gallery square (uniform and veil) | Pre-cropped square, held centred |
+| `uploads/gate-loop.mp4` | Background film on the opening gate | 1280×576, 5.8s loop, 630 KB |
 
 To swap in different photos, overwrite those files. If the framing then sits
 awkwardly, adjust `object-position` on `.photo--arch img`, `.photo--square img`,
@@ -53,17 +55,26 @@ The aerial shot is re-encoded to 1400px wide at quality 78 (390 KB, down from
 (176 KB, down from 3.3 MB) — worth repeating for any photo you add, since guests
 open this on mobile data.
 
-The bench photo was cropped rather than panned because the original is a wide
-4:3 frame: dropped into a small square tile untouched, the couple would have
-been a speck in a lot of church. The crop is a 1300px square taken at (340, 492)
-of the 2400×1792 original, so re-cropping from the original is repeatable.
+Four of the gallery tiles are pre-cropped squares rather than panned with
+`object-position`: dropped into a small tile untouched, a wide original leaves
+the couple a speck in a lot of scenery. Crops taken from each original, so they
+are repeatable: photo-4 a 1300px square at (340, 492) of 2400×1792; photo-5 a
+1080px square at (0, 300) of 1080×1622; photo-6 a 1000px square at (290, 0) of
+1624×1080.
 
-### The film
+### The gate film
 
-The video tile is click-to-play and stays **muted and looping** so it never
-fights the song. The `#t=0.6` fragment on its `src` makes the browser paint a
-real frame of the film as its own still, so the tile is never black before a
-guest taps play — there is no separate poster image to keep in sync.
+The opening gate plays `gate-loop.mp4` behind the emblem — muted, looping and
+autoplaying, which is the only combination browsers allow without a tap. It
+pauses itself once the gate closes, since nothing is looking at it after that,
+and the marble background on `.gate` stays underneath as the fallback if the
+file never loads.
+
+The source is 1280×576, far wider than a phone screen, so `object-fit: cover`
+crops it hard in portrait. The scrim over it is therefore two layers: a soft
+radial pool of shade under the emblem and lettering, over a lighter overall
+wash — the type always has something to sit on while the film stays visible
+towards the edges. Both live in `.gate__scrim`.
 
 ### Full wedding video
 
@@ -72,7 +83,7 @@ are not part of the site. The MP4 is past GitHub's 100 MB per-file hard limit,
 and serving a file that size from a static host would be slow and expensive for
 guests on mobile data. To put the full video on the invitation, upload it to
 YouTube or Vimeo and embed it, or export a compressed web cut (1080p, ~8 Mbps,
-under ~25 MB) into `uploads/` and point the film tile at it.
+under ~25 MB) into `uploads/` and add a tile for it in the gallery.
 
 ## Settings
 

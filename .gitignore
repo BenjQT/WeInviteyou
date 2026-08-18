@@ -16,3 +16,7 @@ Desktop.ini
 # past GitHub's 100 MB per-file hard limit, and far too heavy to stream from a
 # static host. See the README's "Full wedding video" note.
 moriweddinginvitation/
+
+# Loose recordings dropped in the project root, not part of the site
+ScreenRecording_*.MP4
+mockwedding.mp4

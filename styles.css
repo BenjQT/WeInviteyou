@@ -324,7 +324,7 @@ body::before {
 /* For a source already cropped square — nothing to pan, so hold it centred. */
 .photo--centred img { object-position: center; }
 
-/* Full-bleed row inside the gallery grid — the aerial frame and the film. */
+/* Full-bleed row inside the gallery grid — the aerial frame. */
 .photo--wide { grid-column: 1 / -1; aspect-ratio: 16 / 9; border-radius: 8px; }
 .photo--wide img { object-position: center 48%; }
 
@@ -474,7 +474,6 @@ body.is-muted .eq__bar { animation: none; }
 .dress__value { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 30px; margin: 12px 0 26px; }
 .swatches { display: flex; justify-content: center; gap: 12px; }
 .swatch { width: 38px; height: 38px; border-radius: 50%; }
-.swatch--pale { border: 1px solid rgba(0, 0, 0, .08); }
 .dress__note { font-size: 11px; letter-spacing: .16em; color: var(--softMuted); margin-top: 22px; line-height: 1.8; }
 
 /* --- Gallery ------------------------------------------------------------- */
@@ -485,66 +484,9 @@ body.is-muted .eq__bar { animation: none; }
 
 /* Hover is scoped to the grid so the hero arch keeps its still, framed look. */
 .gallery__grid .photo { transition: box-shadow .45s ease; }
-.gallery__grid .photo img,
-.gallery__grid .film__el { transition: transform .7s cubic-bezier(.2, .7, .2, 1); }
+.gallery__grid .photo img { transition: transform .7s cubic-bezier(.2, .7, .2, 1); }
 .gallery__grid .photo:hover { box-shadow: 0 0 0 1px var(--gold), 0 14px 34px rgba(0, 0, 0, .38); }
 .gallery__grid .photo:hover img { transform: scale(1.055); }
-
-/* --- The film ------------------------------------------------------------ */
-
-.film { background: rgba(0, 0, 0, .3); }
-.film__el { width: 100%; height: 100%; object-fit: cover; display: block; }
-
-.film__btn {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: opacity .4s ease;
-}
-.film__btn::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(rgba(8, 26, 20, .1), rgba(8, 20, 16, .55));
-  transition: opacity .4s ease;
-}
-
-.film__icon {
-  position: relative;
-  width: 52px;
-  height: 52px;
-  border-radius: 50%;
-  background: var(--gold);
-  color: #0f221b;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 16px;
-  padding-left: 3px;                 /* optically centres the ▶ glyph */
-  box-shadow: 0 8px 24px rgba(0, 0, 0, .35);
-  transition: transform .35s ease;
-}
-.film__btn:hover .film__icon { transform: scale(1.08); }
-
-/* Once it is running the chrome gets out of the way, and comes back on hover. */
-.film.is-playing .film__btn { opacity: 0; }
-.film.is-playing .film__btn:hover { opacity: 1; }
-.film.is-playing .film__icon { padding-left: 0; }
-
-.film__caption {
-  position: absolute;
-  left: 14px;
-  bottom: 12px;
-  font-size: 9px;
-  letter-spacing: .26em;
-  color: var(--deepFg);
-  text-shadow: 0 1px 8px rgba(0, 0, 0, .6);
-  transition: opacity .4s ease;
-  pointer-events: none;
-}
-.film.is-playing .film__caption { opacity: 0; }
 
 /* --- RSVP ---------------------------------------------------------------- */
 
@@ -619,6 +561,37 @@ body.is-muted .eq__bar { animation: none; }
   transition: opacity .5s ease;
 }
 .gate.is-closing { opacity: 0; }
+
+/* The film sits behind everything, with a scrim over it so the gold and ivory
+   keep their contrast against whatever frame is playing. The marble on .gate
+   stays underneath as the fallback if the video never loads. */
+.gate__video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+}
+.gate__scrim {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  /* A soft pool of shade under the emblem and type, over a lighter overall
+     wash — so the lettering always has something to sit on while the film
+     stays visible out towards the edges. */
+  background:
+    radial-gradient(ellipse 78% 42% at 50% 46%, rgba(8, 20, 16, .82), rgba(8, 20, 16, 0) 72%),
+    linear-gradient(rgba(8, 26, 20, .5), rgba(8, 20, 16, .74));
+}
+.gate__content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 26px;
+}
 .gate.is-open { display: none; }
 
 /* The emblem carries its own gold ring and lettering, so it replaces the

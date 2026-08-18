@@ -214,49 +214,23 @@ var Music = (function () {
   };
 })();
 
-/* --- The garden film ----------------------------------------------------- */
-
-// Kept muted and looping on purpose: the film should never fight the song
-// playing over it. Tapping the frame toggles it.
-(function film() {
-  var tile = document.querySelector('.film');
-  if (!tile) return;
-
-  var video = tile.querySelector('.film__el');
-  var icon = $('filmIcon');
-
-  $('filmBtn').addEventListener('click', function () {
-    if (video.paused) {
-      var p = video.play();
-      if (p && p.catch) p.catch(function () { /* autoplay refused — leave it */ });
-    } else {
-      video.pause();
-    }
-  });
-
-  video.addEventListener('play', function () {
-    tile.classList.add('is-playing');
-    icon.textContent = '❙❙';
-    $('filmBtn').setAttribute('aria-label', 'Pause the garden film');
-  });
-
-  video.addEventListener('pause', function () {
-    tile.classList.remove('is-playing');
-    icon.textContent = '▶';
-    $('filmBtn').setAttribute('aria-label', 'Play the garden film');
-  });
-})();
-
 /* --- Opening gate -------------------------------------------------------- */
 
 (function gate() {
   var el = $('gate');
 
+  var video = $('gateVideo');
+
   function open() {
     if (el.classList.contains('is-closing')) return;
     el.classList.add('is-closing');
     Music.enter();
-    setTimeout(function () { el.classList.add('is-open'); }, 500);
+    setTimeout(function () {
+      el.classList.add('is-open');
+      // The gate is display:none from here on, so stop decoding frames nobody
+      // is looking at.
+      if (video && video.pause) video.pause();
+    }, 500);
   }
 
   el.addEventListener('click', open);

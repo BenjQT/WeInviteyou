@@ -155,15 +155,12 @@
           <img src="uploads/photo-3.jpg" alt="JhonJhon and Juliet lying in the grass, seen from above" loading="lazy" onerror="this.closest('.photo').classList.add('is-empty')" />
         </figure>
 
-        <figure class="photo photo--wide film">
-          <!-- #t=0.6 makes the browser paint a real frame of the film as its own
-               still, so the tile never sits black before the guest taps play. -->
-          <video class="film__el" src="uploads/couple-garden.mp4#t=0.6" preload="metadata" playsinline loop muted
-                 aria-label="A short film of JhonJhon and Juliet in the garden"></video>
-          <button type="button" class="film__btn" id="filmBtn" aria-label="Play the garden film">
-            <span class="film__icon" id="filmIcon">▶</span>
-          </button>
-          <figcaption class="film__caption">THE GARDEN FILM</figcaption>
+        <figure class="photo photo--square photo--centred">
+          <img src="uploads/photo-5.jpg" alt="On the blue bench in the flower garden" loading="lazy" onerror="this.closest('.photo').classList.add('is-empty')" />
+        </figure>
+
+        <figure class="photo photo--square photo--centred">
+          <img src="uploads/photo-6.jpg" alt="In uniform and veil on the blue bench" loading="lazy" onerror="this.closest('.photo').classList.add('is-empty')" />
         </figure>
       </div>
     </section>
@@ -197,11 +194,10 @@
         <p class="dress__value">Semi Formal</p>
         <p class="finer__body">We kindly request our guests to wear these colors on our special day.</p>
         <div class="swatches" aria-label="Suggested colour palette">
-          <span class="swatch" style="background:#1b3a2c"></span>
-          <span class="swatch" style="background:#4d7360"></span>
-          <span class="swatch" style="background:#8fa899"></span>
-          <span class="swatch" style="background:#e3c68c"></span>
-          <span class="swatch swatch--pale" style="background:#f6f1e6"></span>
+          <span class="swatch" style="background:#50C878"></span>
+          <span class="swatch" style="background:#046307"></span>
+          <span class="swatch" style="background:#009B77"></span>
+          <span class="swatch" style="background:#008A5E"></span>
         </div>
         <p class="dress__note">Kindly wear these tones.<br />Please avoid white.</p>
       </div>
@@ -237,6 +233,13 @@
 
 <!-- OPENING GATE -->
 <div class="gate" id="gate">
+  <!-- Muted + autoplay so browsers allow it; the marble on .gate stays behind
+       as the fallback if the file never loads. -->
+  <video class="gate__video" id="gateVideo" src="uploads/gate-loop.mp4"
+         autoplay muted loop playsinline preload="auto" aria-hidden="true"></video>
+  <div class="gate__scrim" aria-hidden="true"></div>
+
+  <div class="gate__content">
   <div class="gate__emblem">
     <img src="uploads/emblem.png" alt="The JhonJhon and Juliet monogram" />
   </div>
@@ -244,6 +247,7 @@
   <p class="gate__date">11 · 28 · 2026</p>
   <button type="button" class="gate__btn" id="gateBtn">OPEN INVITATION</button>
   <p class="gate__hint">MUSIC WILL PLAY</p>
+  </div>
 </div>
 
 <script src="script.js"></script>
