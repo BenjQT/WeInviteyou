@@ -100,7 +100,7 @@ Everything configurable sits in the `CONFIG` block at the top of `script.js`:
 
 | Key | Purpose |
 | --- | --- |
-| `weddingDate` | Countdown target — `2026-11-28T13:00:00+08:00` (Philippine time) |
+| `weddingDate` | Countdown target — `2026-11-28T12:00:00+08:00` (Philippine time) |
 | `videoId` | YouTube id used as the background track |
 | `volume` | Playback volume, 0–100 |
 | `formEndpoint` | Formspree endpoint that receives RSVPs |

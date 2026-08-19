@@ -5,7 +5,7 @@
 
 var CONFIG = {
   // Ceremony start, Philippine time. Drives the countdown.
-  weddingDate: '2026-11-28T13:00:00+08:00',
+  weddingDate: '2026-11-28T12:00:00+08:00',
 
   // YouTube video used as the background track.
   videoId: '4B_TY200nOg',
