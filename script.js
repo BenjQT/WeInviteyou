@@ -15,9 +15,9 @@ var CONFIG = {
   formEndpoint: 'https://formspree.io/f/xzepjjwo',
 
   timeline: [
-    { time: '1:00 PM', label: 'CEREMONY' },
-    { time: '2:30 PM', label: 'PICTORIAL' },
-    { time: '3:00 PM', label: 'RECEPTION' },
+    { time: '12:00 PM', label: 'CEREMONY' },
+    { time: '2:00 PM', label: 'PICTORIAL' },
+    { time: '3:30 PM', label: 'RECEPTION' },
     { time: '5:00 PM', label: 'DINNER' },
     { time: '6:00 PM', label: 'WEDDING PROGRAM' }
   ]
